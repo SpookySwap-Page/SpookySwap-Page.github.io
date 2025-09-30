@@ -2,19 +2,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO / EEAT Meta Tags -->
-<title>SpookySwap</title>
-<meta name="description" content="A complete guide to using SpookySwap on Fantom. Learn routing, fees, slippage, MEV considerations, limit orders, DCA, wallet setup, and best practices for secure, efficient swaps.">
-<meta name="author" content="DeFi Research & Engineering">
+<!-- SEO / EEAT Meta Tags -->
+<title>SpookySwap — Fantom DEX</title>
+<meta name="description" content="SpookySwap on Fantom: routing mechanics, SpookySwap v2 vs v3, fee math, slippage frameworks, MEV safety, limit orders, DCA, SpookySwap Bridge tips, liquidity providing, and troubleshooting." />
+<meta name="author" content="DeFi Research & Engineering" />
 <link rel="canonical" href="https://your-github-pages-url.example/">
-<link rel="icon" type="image/png" href="9608.png">
+<link rel="icon" type="image/png" href="9608.png" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://your-github-pages-url.example/">
-<meta property="og:title" content="SpookySwap — The Complete Guide (2025)">
-<meta property="og:description" content="Everything you need to swap with SpookySwap: routing, fees, slippage, MEV safety, limit orders, DCA, wallets, and security on Fantom.">
-<meta property="og:image" content="https://images.unsplash.com/photo-1642152599009-f7091515b888?q=80&amp;w=2070&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3">
+<meta property="og:title" content="SpookySwap — Fantom DEX, SpookySwap Bridge, v2 & v3: The Complete Guide (2025)">
+<meta property="og:description" content="Everything you need to trade on SpookySwap: router logic, SpookySwap v2 vs v3, fees, slippage, MEV protection, limit orders, DCA, SpookySwap Bridge, LP strategy, and risk controls.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1642152599009-f7091515b888?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3">
 
 <meta property="article:published_time" content="2025-08-06T12:00:00Z">
 <meta property="article:author" content="DeFi Research & Engineering">
@@ -22,18 +22,27 @@
 <!-- Twitter Card -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="https://your-github-pages-url.example/">
-<meta property="twitter:title" content="SpookySwap — The Complete Guide (2025)">
-<meta property="twitter:description" content="Learn SpookySwap routing, fees, slippage, limit orders, DCA, and MEV-safe practices on Fantom.">
-<meta property="twitter:image" content="https://images.unsplash.com/photo-1642152599009-f7091515b888?q=80&amp;w=2070&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3">
+<meta property="twitter:title" content="SpookySwap on Fantom — Router, Bridge, v2 vs v3, Fees & Safety">
+<meta property="twitter:description" content="Optimize swaps on SpookySwap: slippage math, gas strategy, SpookySwap Bridge basics, LP insights, and failure recovery playbooks.">
+<meta property="twitter:image" content="https://images.unsplash.com/photo-1642152599009-f7091515b888?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3">
 
 <!-- Google Fonts -->
 <link href="css2.css" rel="stylesheet">
 
-<!-- Schema.org Markup for EEAT & SEO -->
-<!-- (Optional) Add JSON-LD for Article/FAQPage -->
+<!-- (Optional) JSON-LD Article Schema -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"TechArticle",
+  "headline":"SpookySwap — Fantom DEX, SpookySwap Bridge, SpookySwap v2 & v3 (2025 Guide)",
+  "description":"Expert guide covering routing on SpookySwap, differences between SpookySwap v2 and v3, fee modeling, slippage frameworks, MEV-aware execution, SpookySwap Bridge considerations, and LP strategy.",
+  "datePublished":"2025-08-06T12:00:00Z",
+  "author":{"@type":"Organization","name":"DeFi Research & Engineering"},
+  "mainEntityOfPage":"https://your-github-pages-url.example/"
+}
+</script>
 
 <style>
-    /* CSS Reset and Base Styles */
     :root {
         --primary-color: #1a202c;
         --secondary-color: #4a5568;
@@ -48,7 +57,7 @@
     h1, h2, h3, h4, h5, h6 { font-family: 'Lato', sans-serif; color: var(--primary-color); font-weight: 700; line-height: 1.3; }
     h1 { font-size: 3.2rem; font-weight: 900; }
     h2 { font-size: 2.2rem; margin-top: 3.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; }
-    h3 { font-size: 1.6rem; margin-top: 2.5rem; }
+    h3 { font-size: 1.6rem; margin-top: 2.0rem; }
     p { margin-bottom: 1rem; }
     a { color: var(--accent-color); text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -59,14 +68,14 @@
     .hero { background-color: var(--bg-light); padding: 4rem 0; }
     .hero .container { display: flex; align-items: center; gap: 2rem; }
     .hero-text { flex: 1; }
-    .hero-text p { font-size: 1.2rem; max-width: 500px; }
-    .hero-image { flex: 1; display: none; /* Hide on mobile first */ }
+    .hero-text p { font-size: 1.2rem; max-width: 560px; }
+    .hero-image { flex: 1; display: none; }
     .hero-image img { border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
     .cta-button { display: inline-block; background-color: var(--accent-color); color: var(--bg-white); padding: 1rem 2.5rem; border-radius: 8px; font-size: 1.1rem; font-weight: 700; text-decoration: none; transition: background-color 0.3s ease; margin-top: 1.5rem; }
     .cta-button:hover { background-color: var(--accent-hover-color); color: var(--bg-white); text-decoration: none; }
     .center-cta { text-align: center; padding: 2rem 0; }
 
-    /* Step-by-Step Guide Section */
+    /* Steps */
     .step-guide { padding: 4rem 0 2rem 0; background-color: var(--bg-white); }
     .step-guide h2 { text-align: center; border-bottom: none; margin-bottom: 3rem; font-size: 2.5rem; }
     .steps-container { display: grid; grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
@@ -74,7 +83,7 @@
     .step-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
     .step-icon { background-color: var(--icon-bg-color); width: 60px; height: 60px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
     .step-icon svg { width: 32px; height: 32px; color: #4c4cff; }
-    .step-content h3 { margin-top: 0; font-size: 1.4rem; }
+    .step-content h3 { margin-top: 0; font-size: 1.35rem; }
 
     /* Main Content & Tables */
     .main-content { padding: 2rem 0 4rem 0; }
@@ -85,20 +94,20 @@
     tr:last-child td { border-bottom: none; }
     tr:hover { background-color: #edf2f7; }
 
-    /* Trust & Author Section */
+    /* EEAT Section */
     .eeat-section { background-color: var(--bg-light); border: 1px solid var(--border-color); padding: 2rem; margin: 3rem 0; border-radius: 12px; }
     .eeat-section h3 { margin-top: 0; }
     .eeat-section ul { list-style: none; padding: 0; }
     .eeat-section ul li { margin-bottom: 0.75rem; }
     .eeat-section ul li a { font-weight: 600; }
 
-    /* FAQ Section */
+    /* FAQ */
     .faq-section { padding: 2rem 0 4rem 0; }
     .faq-item { border-bottom: 1px solid var(--border-color); padding: 1.5rem 0; }
     .faq-item:last-child { border-bottom: none; }
-    .faq-item h3 { margin: 0; font-size: 1.3rem; }
+    .faq-item h3 { margin: 0; font-size: 1.2rem; }
 
-    /* Responsive Design */
+    /* Responsive */
     @media (min-width: 768px) {
         .hero-image { display: block; }
         .steps-container { grid-template-columns: repeat(2, 1fr); }
@@ -108,7 +117,7 @@
     }
     @media (max-width: 767px) {
         h1 { font-size: 2.5rem; }
-        h2 { font-size: 1.8rem; }
+        h2 { font-size: 1.85rem; }
         .hero .container { flex-direction: column; }
     }
 </style>
@@ -119,12 +128,16 @@
 <header class="hero">
     <div class="container">
         <div class="hero-text">
-            <h1>SpookySwap</h1>
-            <p>This expert guide explains how to swap tokens with SpookySwap — covering routing, fees, slippage control, MEV-safe practices, limit orders, DCA, and security on the Fantom network.</p>
-            <a href="" class="cta-button" target="_blank" rel="noopener noreferrer nofollow">Open SpookySwap →</a>
+            <h1>SpookySwap on Fantom — Router, Bridge, v2 & v3</h1>
+            <p>
+                Trade smarter on <strong>SpookySwap</strong>: understand how routing weighs <em>effective price</em>, when to prefer
+                <strong>SpookySwap v2</strong> vs <strong>SpookySwap v3</strong>, and how to prepare assets with the <strong>SpookySwap Bridge</strong> workflow.
+                Get actionable frameworks for slippage, fee math, MEV safety, and failure recovery.
+            </p>
+            <a href="#" class="cta-button" target="_blank" rel="noopener noreferrer nofollow">Open SpookySwap →</a>
         </div>
         <div class="hero-image">
-            <img src="spoo.png" alt="SpookySwap V3 preview">
+            <img src="spoo.png" alt="SpookySwap v2/v3 UI preview">
         </div>
     </div>
 </header>
@@ -132,46 +145,50 @@
 <!-- Step-by-Step Guide Section -->
 <section class="step-guide">
     <div class="container">
-        <h2>How SpookySwap Works</h2>
+        <h2>How SpookySwap Works on Fantom</h2>
         <div class="steps-container">
             <!-- Step 1 -->
             <div class="step-card">
                 <div class="step-icon">
+                    <!-- Wallet icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2Z"/></svg>
                 </div>
                 <div class="step-content">
-                    <h3>1) Connect Wallet</h3>
-                    <p>Use MetaMask, Rabby, or a hardware wallet via WalletConnect. Switch to <strong>Fantom</strong> and keep some <strong>FTM</strong> for gas.</p>
+                    <h3>1) Connect Wallet to Fantom</h3>
+                    <p>Use MetaMask or Rabby; pair with a hardware wallet for key security. Select <strong>Fantom Opera</strong> and keep <strong>FTM</strong> for approvals and swaps.</p>
                 </div>
             </div>
             <!-- Step 2 -->
             <div class="step-card">
                 <div class="step-icon">
+                    <!-- Route icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193l-3.722.267c-.34.024-.65.18-.882.416l-2.652 2.652a1.125 1.125 0 0 1-1.591 0l-2.652-2.652a1.125 1.125 0 0 0-.882-.416l-3.722-.267A2.125 2.125 0 0 1 3 14.894V10.608c0-.97.616-1.813 1.5-2.097L6.6 8.111a1.125 1.125 0 0 1 1.087.057l1.844 1.23a1.125 1.125 0 0 0 1.087 0l1.844-1.23a1.125 1.125 0 0 1 1.087-.057l2.153 1.435Z"/></svg>
                 </div>
                 <div class="step-content">
-                    <h3>2) Quote & Routing</h3>
-                    <p>Select tokens and amount. SpookySwap’s router finds quotes across Fantom pairs (wFTM routes, major stable pairs), aiming for best execution and minimal price impact.</p>
+                    <h3>2) SpookySwap Routing (v2 & v3)</h3>
+                    <p>Choose tokens and size. The router can hop via wFTM and compare <strong>SpookySwap v2</strong> (stable/volatile pools) with <strong>SpookySwap v3</strong> (concentrated liquidity) to maximize net output after gas and pool fees.</p>
                 </div>
             </div>
             <!-- Step 3 -->
             <div class="step-card">
                 <div class="step-icon">
+                    <!-- Shield icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"/></svg>
                 </div>
                 <div class="step-content">
-                    <h3>3) Review Protections</h3>
-                    <p>Set slippage tolerance, consider MEV-minimized/private RPC if available, and verify token contract addresses before approval and swap.</p>
+                    <h3>3) Slippage & MEV Safety</h3>
+                    <p>Set realistic slippage, verify token contracts on FTMScan, and consider private/builder RPC to reduce sandwich risk. Split large orders across time or pools.</p>
                 </div>
             </div>
             <!-- Step 4 -->
             <div class="step-card">
                 <div class="step-icon">
+                    <!-- Check icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 12m18 0v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6m18 0V9M3 12V9m18 3a9 9 0 0 0-18 0"/></svg>
                 </div>
                 <div class="step-content">
-                    <h3>4) Swap & Settle</h3>
-                    <p>Approve the token (first time only), then sign the swap. Settlement finalizes on-chain; confirm balances and token contracts in your wallet.</p>
+                    <h3>4) Approve, Swap, Settle</h3>
+                    <p>Approve tokens (first time) and sign. Final settlement is on-chain to your wallet; confirm balances and review route hops for transparency.</p>
                 </div>
             </div>
         </div>
@@ -179,21 +196,69 @@
 </section>
 
 <div class="center-cta">
-    <a href="" class="cta-button" target="_blank" rel="noopener noreferrer">Try SpookySwap →</a>
+    <a href="#" class="cta-button" target="_blank" rel="noopener noreferrer">Try SpookySwap on Fantom →</a>
 </div>
 
 <!-- Main Content -->
 <main class="main-content container">
 
-    <p>This guide is a practical companion for swapping tokens with <strong>SpookySwap</strong> on <strong>Fantom</strong>. Learn routing, tune slippage and gas, and use advanced tools like <strong>limit orders</strong> and <strong>DCA</strong> (if integrated), while protecting yourself from MEV and other pitfalls.</p>
+    <p>
+        This handbook shows how to use <strong>SpookySwap</strong> effectively: comparing <strong>SpookySwap v2</strong> vs <strong>SpookySwap v3</strong>,
+        modeling <em>effective price</em> (received tokens minus gas/fees), and prepping funds with a <strong>SpookySwap Bridge</strong>-style workflow.
+        You’ll also find LP strategy notes, failure diagnostics, and an execution checklist for consistent results.
+    </p>
 
-    <img src="screen2.png" alt="SpookySwap walkthrough">
+    <img src="Screenshot_3.png" alt="SpookySwap walkthrough on Fantom">
 
-    <h2>Swap Methods with SpookySwap (and Alternatives)</h2>
-    <p>SpookySwap provides a fast, low-cost DEX experience on Fantom. Depending on your goals (speed, control, order size), different methods may fit better.</p>
+    <!-- v2 vs v3 -->
+    <h2>SpookySwap v2 vs SpookySwap v3 — Execution & Liquidity Behavior</h2>
+    <p>
+        <strong>SpookySwap v2</strong> offers two pool archetypes: <em>volatile</em> (x·y=k) for non-correlated pairs and <em>stable</em> (curve-like) for correlated assets.
+        v2 is predictable and simple. <strong>SpookySwap v3</strong> uses <em>concentrated liquidity</em>, letting LPs allocate depth around active price ranges; this often reduces slippage
+        for trades executed inside those ranges, but depth can thin out if price exits the range.
+    </p>
 
-    <!-- Table 1: Method Comparison -->
-    <h3>Comparing Swap Methods</h3>
+    <h3>SpookySwap v2 vs v3 — Practical Comparison</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Dimension</th>
+                <th>SpookySwap v2</th>
+                <th>SpookySwap v3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="highlight-row">
+                <td>Liquidity Shape</td>
+                <td>Full-curve exposure (stable/volatile)</td>
+                <td>Concentrated near price; deeper local liquidity</td>
+            </tr>
+            <tr>
+                <td>When It Wins</td>
+                <td>General swaps, stable pairs, majors with steady depth</td>
+                <td>Active ranges in popular pairs, tight slippage needs</td>
+            </tr>
+            <tr>
+                <td>Slippage Profile</td>
+                <td>Stable and predictable by pool depth</td>
+                <td>Very tight in-range, wider out-of-range</td>
+            </tr>
+            <tr>
+                <td>Routing Notes</td>
+                <td>Simple direct routes; low Fantom gas</td>
+                <td>Router may prefer v3 if in-range depth dominates</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Methods -->
+    <h2>Swap Methods on SpookySwap (Router, v2/v3 Direct, Aggregators)</h2>
+    <p>
+        For small tickets, direct <strong>SpookySwap v2</strong> or <strong>v3</strong> routes often suffice. For larger trades, the router may hop via wFTM or combine pools
+        to lower price impact. If you’re arriving from another chain, use a reputable bridge first (see “SpookySwap Bridge” section), then execute on SpookySwap locally.
+    </p>
+
+    <h3>Method Comparison for SpookySwap Execution</h3>
     <table>
         <thead>
             <tr>
@@ -205,36 +270,53 @@
         </thead>
         <tbody>
             <tr class="highlight-row">
-                <td><strong>SpookySwap Router (UI)</strong></td>
-                <td><strong>Low fees</strong>, quick finality</td>
-                <td>Competitive pool fees on Fantom, slippage controls, verified token lists</td>
-                <td>Liquidity varies by pair; always verify token contracts</td>
+                <td><strong>SpookySwap Router</strong></td>
+                <td>Net-best price on Fantom</td>
+                <td>Chooses between v2/v3; can hop via wFTM; weighs gas vs output</td>
+                <td>Always verify token addresses; inspect route preview for size</td>
             </tr>
             <tr>
-                <td><strong>Single DEX / AMM on Fantom</strong></td>
-                <td>Specific pools</td>
-                <td>Direct pool interaction, predictable fee tier</td>
-                <td>May miss better pricing on other pools/routes</td>
+                <td><strong>Direct v2 Pool</strong></td>
+                <td>Straight swaps, stable pairs</td>
+                <td>Stable/volatile models; transparent fee tiers</td>
+                <td>May miss v3 in-range depth</td>
             </tr>
             <tr>
-                <td><strong>Limit Orders (if available)</strong></td>
-                <td>Target price execution</td>
-                <td>Trigger-based fills, hands-off execution</td>
-                <td>No guaranteed fill; expiry/partial fills possible</td>
+                <td><strong>Direct v3 Pool</strong></td>
+                <td>Tight slippage near active ranges</td>
+                <td>Concentrated liquidity improves local price</td>
+                <td>Slippage can widen out-of-range</td>
             </tr>
             <tr>
-                <td><strong>DCA (if available)</strong></td>
-                <td>Reduce timing risk</td>
-                <td>Scheduled swaps, budget control</td>
-                <td>Gas/fees across legs; ensure funding</td>
+                <td><strong>External Aggregator</strong></td>
+                <td>Cross-venue comparisons</td>
+                <td>Benchmarks SpookySwap vs others</td>
+                <td>Extra hops; compare net (gas + price)</td>
             </tr>
         </tbody>
     </table>
 
-    <h2>Understanding Fees on SpookySwap</h2>
-    <p>On Fantom, you pay <strong>gas in FTM</strong> plus the <strong>AMM pool fee</strong> embedded in the route. Effective cost also includes <strong>price impact</strong> and any optional interface/integrator fees.</p>
+    <!-- Bridge -->
+    <h2>SpookySwap Bridge — Cross-Chain Prep for Trading on Fantom</h2>
+    <p>
+        “<strong>SpookySwap Bridge</strong>” generally refers to bridging assets to Fantom before swapping. Pick a reputable cross-chain bridge, double-check the destination
+        token contract on <strong>FTMScan</strong>, and bring a buffer of <strong>FTM</strong> for approvals. After funds land, choose <strong>SpookySwap v2</strong> or <strong>v3</strong> for the swap itself.
+    </p>
+    <h3>Bridge Safety Checklist</h3>
+    <ul>
+        <li>Use only official bridge URLs; avoid search-ad impostors.</li>
+        <li>Bridge a micro-test first; validate the received token contract on Fantom.</li>
+        <li>Keep FTM for gas after bridging; you’ll need it to approve/swap on SpookySwap.</li>
+        <li>Record the bridge tx hash for later reconciliation or support.</li>
+    </ul>
 
-    <!-- Table 2: Fee Breakdown -->
+    <!-- Fees -->
+    <h2>Fees on SpookySwap — Gas, Pool Fee, and Price Impact</h2>
+    <p>
+        Your <em>effective price</em> = received tokens minus <strong>gas (FTM)</strong> minus <strong>pool fees</strong> minus implicit <strong>price impact</strong>.
+        SpookySwap routing aims to minimize this total. On Fantom, gas is low, so slippage/impact and pool tier selection dominate.
+    </p>
+
     <h3>Typical Fee Components</h3>
     <table>
         <thead>
@@ -246,118 +328,129 @@
         </thead>
         <tbody>
             <tr>
-                <td>Gas (Fantom)</td>
-                <td>Low; varies with load</td>
-                <td>Paid in FTM. Keep a buffer for approvals and swaps.</td>
+                <td>Gas (FTM)</td>
+                <td>Low; varies by load</td>
+                <td>Keep a buffer; raise priority in volatile windows to reduce pending time.</td>
             </tr>
             <tr>
-                <td>Pool / Liquidity Fee</td>
-                <td>~0.1%–0.3% (varies)</td>
-                <td>Depends on the pool pair and fee tier.</td>
+                <td>Pool Fee (v2/v3)</td>
+                <td>~0.05%–0.3%+</td>
+                <td>Varies by pool tier and model; verify before signing.</td>
             </tr>
             <tr>
                 <td>Price Impact</td>
-                <td>Route-dependent</td>
-                <td>Higher for illiquid pairs or large size; split orders to mitigate.</td>
-            </tr>
-            <tr>
-                <td>Optional Interface Fee</td>
-                <td>0%–X%</td>
-                <td>Shown transparently in reputable UIs; verify before signing.</td>
+                <td>Depth-dependent</td>
+                <td>Consider splitting size or using limit orders when depth is thin.</td>
             </tr>
         </tbody>
     </table>
 
-    <h2>Safety & Best Practices</h2>
-    <p>DeFi is powerful but unforgiving. Use these practices to stay safe.</p>
-
-    <h3>Practical Protections</h3>
+    <!-- Advanced Strategy -->
+    <h2>Advanced SpookySwap Strategy — Slippage, MEV, and Sizing</h2>
+    <h3>Slippage Framework</h3>
     <ul>
-        <li><strong>Verify token contracts:</strong> Use official links or reputable explorers (e.g., FTMScan). Beware ticker clones.</li>
-        <li><strong>Slippage discipline:</strong> Tight for liquid majors (e.g., 0.1–0.5%), looser for thin tokens. Consider partial fills.</li>
-        <li><strong>MEV-aware flow:</strong> Prefer private / builder relays where supported; avoid leaking large trades to public mempools.</li>
-        <li><strong>Allowance hygiene:</strong> Approve minimal amounts; periodically revoke old allowances.</li>
-        <li><strong>Test first:</strong> Try a small swap before executing big size.</li>
-        <li><strong>Phishing defense:</strong> Bookmark official URLs; never sign unknown or opaque transactions.</li>
+        <li><strong>Stables/Majors:</strong> 0.1–0.5% typical on deep pools (v2 stable or v3 in-range).</li>
+        <li><strong>Long-tail tokens:</strong> Start conservative; widen only after testing route stability.</li>
+        <li><strong>Volatile sessions:</strong> Slightly widen or use limit orders to avoid repeated reverts.</li>
     </ul>
 
-    <h2>Compliance & Risks</h2>
-    <p>Swaps carry market risk (volatility, slippage) and smart-contract risk (pool/router issues). Keep transaction records per your jurisdiction’s rules. Store seed phrases offline and consider hardware wallets.</p>
+    <h3>MEV-Aware Execution</h3>
+    <ul>
+        <li>Prefer private/builder RPC if supported; less mempool exposure.</li>
+        <li>Split large trades; smaller footprints reduce sandwich incentives.</li>
+        <li>Increase priority fee to shorten time-to-inclusion during spikes.</li>
+    </ul>
+
+    <h3>Analytics & KPIs</h3>
+    <ul>
+        <li><strong>Quoted vs Realized Output:</strong> Track slippage/fees drift over time.</li>
+        <li><strong>Effective Price:</strong> Received per unit after all costs — compare routes fairly.</li>
+        <li><strong>Fail/Cancel Rate:</strong> Tuning indicator for slippage and RPC health.</li>
+    </ul>
+
+    <!-- LP Section -->
+    <h2>Liquidity Providing on SpookySwap (v2 & v3)</h2>
+    <p>
+        As an LP, you earn fees but take <em>inventory risk</em>. v2 volatile pools carry classic impermanent loss; v2 stable pools mitigate it for correlated pairs.
+        In v3, your range choice drives fee capture: narrow ranges can earn more but require repositioning if price exits.
+    </p>
+    <h3>LP Best Practices</h3>
+    <ul>
+        <li>Pick pairs with persistent flow and sensible fee tiers.</li>
+        <li>Model IL vs fee income under different price paths; don’t extrapolate from one day of volume.</li>
+        <li>For v3, set ranges where volume actually happens; monitor and rebalance if price drifts.</li>
+    </ul>
+
+    <!-- Troubleshooting -->
+    <h2>Troubleshooting SpookySwap — Common Errors & Fixes</h2>
+    <ul>
+        <li><strong>INSUFFICIENT_OUTPUT_AMOUNT:</strong> Price moved; refresh quotes, widen slippage modestly, or split size.</li>
+        <li><strong>TRANSFER_FROM_FAILED:</strong> Missing/insufficient allowance or token fee-on-transfer. Re-approve the minimum and retry.</li>
+        <li><strong>Pending too long:</strong> Raise priority fee or switch RPC; reduce mempool exposure with private routing if available.</li>
+        <li><strong>Unexpected token received:</strong> Verify exact contract addresses on FTMScan; confirm pool path in the route preview.</li>
+    </ul>
 
     <!-- Trust & Author Section -->
     <section class="eeat-section">
         <h3>Authoritative & Trustworthy Resources</h3>
-        <p>For deeper technical and safety details, consult official docs and wallet resources.</p>
+        <p>Validate every step with primary sources and explorers.</p>
         <ul>
-            <li><a href="https://metamask.io/learn" target="_blank" rel="noopener nofollow">MetaMask Learn</a> — Wallet safety, approvals, and gas basics.</li>
-            <li><a href="https://docs.uniswap.org/" target="_blank" rel="noopener nofollow">Uniswap Docs</a> — AMM mechanics (general concepts applicable across chains).</li>
-            <li><a href="https://ftmscan.com/" target="_blank" rel="noopener nofollow">FTMScan</a> — Verify token contracts and track transactions on Fantom.</li>
+            <li><a href="https://ftmscan.com/" target="_blank" rel="noopener nofollow">FTMScan</a> — Verify Fantom token contracts and track transactions.</li>
+            <li><a href="https://metamask.io/learn" target="_blank" rel="noopener nofollow">MetaMask Learn</a> — Approvals, gas, and wallet safety.</li>
+            <li><a href="https://docs.uniswap.org/" target="_blank" rel="noopener nofollow">Uniswap Docs</a> — AMM fundamentals relevant to SpookySwap v2/v3 behavior.</li>
         </ul>
         <div class="author-bio">
             <h4>About the Author</h4>
-            <p>Prepared by DeFi Research & Engineering — builders and auditors focused on routing, liquidity, and wallet UX. Our goal is clear, practical guidance for safe, efficient on-chain execution.</p>
+            <p>Prepared by DeFi Research & Engineering — practitioners in routing, liquidity modeling, and wallet UX. Goal: safer, more efficient execution on SpookySwap.</p>
         </div>
     </section>
 
     <!-- FAQ Section -->
     <section class="faq-section">
-        <h2>Frequently Asked Questions (FAQ)</h2>
+        <h2>SpookySwap FAQ — Bridge, v2/v3, Fees, Safety</h2>
         <div class="faq-list">
-
             <div class="faq-item">
-                <h3>What makes SpookySwap different from using a single DEX?</h3>
-                <p>SpookySwap focuses on fast, low-fee swaps on Fantom with a streamlined router and verified lists to help reduce mistakes and price impact.</p>
+                <h3>When should I choose SpookySwap v2 vs SpookySwap v3?</h3>
+                <p><strong>v2:</strong> stable pairs and general swaps with steady depth. <strong>v3:</strong> when liquidity is concentrated around current price and you need tighter slippage. The router often selects the better path automatically.</p>
             </div>
-
             <div class="faq-item">
-                <h3>How do I set slippage correctly?</h3>
-                <p>Use tight slippage (e.g., 0.1–0.5%) for liquid pairs and wider for illiquid ones. If price moves beyond your tolerance, the transaction won’t execute.</p>
+                <h3>How do I use the SpookySwap Bridge safely?</h3>
+                <p>Use reputable bridges from official links only. Bridge a small test, verify destination token contracts on FTMScan, and keep FTM for gas. Then swap on SpookySwap.</p>
             </div>
-
             <div class="faq-item">
-                <h3>How can I reduce MEV risk?</h3>
-                <p>Avoid broadcasting large trades to public mempools; where available, use private RPC or builder relays, keep slippage tight, and consider splitting the order.</p>
+                <h3>What slippage should I set on SpookySwap?</h3>
+                <p>Stables/majors: 0.1–0.5% typical. Long-tail tokens may require more. If swaps fail, refresh, adjust slippage modestly, or split the order.</p>
             </div>
-
             <div class="faq-item">
-                <h3>Which wallets work best?</h3>
-                <p>MetaMask and Rabby are common on Fantom; pair with a hardware wallet for stronger key security. Keep some FTM for gas.</p>
+                <h3>How can I reduce MEV on SpookySwap?</h3>
+                <p>Prefer private/builder RPC, use tighter slippage, avoid peak volatility, and split large trades. Faster inclusion reduces mempool exposure.</p>
             </div>
-
             <div class="faq-item">
-                <h3>Does SpookySwap support limit orders and DCA?</h3>
-                <p>If supported in the current UI, limit orders target a specific price and execute upon reaching it; DCA schedules periodic swaps to reduce timing risk.</p>
+                <h3>Why is realized output different from the quote?</h3>
+                <p>Market moves, pool fees, and inclusion delay. Track <em>effective price</em> (received minus costs) and compare routes on that basis.</p>
             </div>
-
             <div class="faq-item">
-                <h3>Why did my output differ from the initial quote?</h3>
-                <p>On-chain states change quickly. Price impact, pool fees, and route refresh can alter outputs. Proper slippage and timely execution minimize discrepancies.</p>
+                <h3>Do I need KYC to trade on SpookySwap?</h3>
+                <p>SpookySwap is wallet-connected. Typically no KYC, but follow your local reporting rules and keep records.</p>
             </div>
-
             <div class="faq-item">
-                <h3>Do I need KYC?</h3>
-                <p>Wallet-connected DEX usage generally doesn’t require KYC, but your local laws may impose reporting obligations—keep records.</p>
+                <h3>How big can I trade without heavy slippage?</h3>
+                <p>It depends on pool depth and v3 range concentration. For size, check route preview, split orders, or consider limit orders.</p>
             </div>
-
             <div class="faq-item">
-                <h3>How large can I swap without heavy slippage?</h3>
-                <p>It depends on pair liquidity. For larger size, split orders, use limit orders, or schedule DCA to reduce impact.</p>
+                <h3>How do I verify the correct token on SpookySwap?</h3>
+                <p>Use FTMScan and official project docs to match contract addresses. Never rely on ticker names or icons alone.</p>
             </div>
-
             <div class="faq-item">
-                <h3>How do I verify I’m buying the correct token?</h3>
-                <p>Match contract addresses from official project pages or FTMScan. Beware of ticker look-alikes.</p>
+                <h3>My tx failed — what should I do?</h3>
+                <p>Re-quote, widen slippage slightly, raise priority fee, confirm allowances, and verify token contracts. As needed, revoke and re-approve the minimum.</p>
             </div>
-
-            <div class="faq-item">
-                <h3>My transaction failed — what now?</h3>
-                <p>Common causes: insufficient FTM for gas, too-tight slippage, stale route, or allowance issues. Add FTM, widen slippage slightly, refresh the route, re-approve if needed, and retry with a small test.</p>
-            </div>
-
         </div>
     </section>
 
 </main>
+</body>
+</html>
 
 
 
